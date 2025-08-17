@@ -1,9 +1,10 @@
-import React from "react";
+import Toaster from "../test-ui/Toaster";
 
 const Hero = () => {
   return (
     <>
-      <h1>Next.js rontend Template for 2025</h1>
+      <h1>Next.js Frontend Template for 2025</h1>
+      <Toaster />
     </>
   );
 };

@@ -4,6 +4,7 @@ import Header from "../layouts/Header";
 import Footer from "../layouts/Footer";
 import FontsProvider from "./FontsProvider";
 import ThemesProvider from "./ThemesProvider";
+import { Toaster } from "../ui/shadcn/sonner";
 import { useScrollStatus } from "@/libs/hooks/use-scroll";
 import { HamburgerMenuProvider } from "./HamburgerProvider";
 import { useBreakpoint } from "@/libs/hooks/use-breakpoints";
@@ -36,6 +37,7 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
             </HamburgerMenuProvider>
             {children}
           </main>
+          <Toaster />
           <Footer />
         </FontsProvider>
       </ThemesProvider>

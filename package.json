@@ -1,7 +1,7 @@
 {
-  "name": "create-frontend-2025",
+  "name": "create-next-features",
   "author": "@vivekcsein",
-  "description": "A frontend template for 2025 using framer motion styled components and zustand",
+  "description": "A Next.js teamplate for development for features and experimentals with ui components",
   "version": "2.0.0",
   "private": true,
   "scripts": {
@@ -77,6 +77,10 @@
     "tailwindcss",
     "styled-components",
     "framer-motion",
-    "zustand"
+    "zustand",
+    "gsap",
+    "react-hook-form",
+    "shadcn",
+    "lucide"
   ]
 }
