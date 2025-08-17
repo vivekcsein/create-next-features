@@ -1,0 +1,61 @@
+/* Utility classes for sizes */
+.boxShadow-large {
+    border-radius: 10px;
+}
+
+.boxShadow-medium {
+    border-radius: 5px;
+}
+
+.boxShadow-small {
+    border-radius: 2px;
+}
+
+.offset-top-left-large,
+.offset-top-right-large,
+.offset-bottom-left-large,
+.offset-bottom-right-large {
+    --border-size: 10px;
+    --border-color: var(--primary);
+    border-radius: calc(var(--radius));
+}
+
+.offset-top-left-medium,
+.offset-top-right-medium,
+.offset-bottom-left-medium,
+.offset-bottom-right-medium {
+    --border-size: 5px;
+    --border-color: var(--primary);
+    border-radius: calc(var(--radius));
+}
+
+.offset-top-left-small,
+.offset-top-right-small,
+.offset-bottom-left-small,
+.offset-bottom-right-small {
+    --border-size: 2px;
+    --border-color: var(--primary);
+    border-radius: calc(var(--radius));
+}
+
+/* Offset directions */
+.offset-top-left {
+    box-shadow: calc(-1 * var(--border-size, 5px)) calc(-1 * var(--border-size, 5px)) calc(2 * var(--border-size, 5px)) var(--border-color);
+}
+
+.offset-top-right {
+    box-shadow: calc(1 * var(--border-size, 5px)) calc(-1 * var(--border-size, 5px)) calc(2 * var(--border-size, 5px)) var(--border-color);
+}
+
+.offset-bottom-left {
+    box-shadow: calc(-1 * var(--border-size, 5px)) calc(1 * var(--border-size, 5px)) calc(2 * var(--border-size, 5px)) var(--border-color);
+}
+
+.offset-bottom-right {
+    box-shadow: calc(1 * var(--border-size, 5px)) calc(1 * var(--border-size, 5px)) calc(2 * var(--border-size, 5px)) var(--border-color);
+}
+
+.rounded-custom-left {
+    border-top-left-radius: 100%;
+    border-bottom-left-radius: 100%;
+}
