@@ -5,6 +5,7 @@ import Footer from "../layouts/Footer";
 import FontsProvider from "./FontsProvider";
 import ThemesProvider from "./ThemesProvider";
 import { Toaster } from "../ui/shadcn/sonner";
+import { AnimationProvider } from "./AnimationProvider";
 import { useScrollStatus } from "@/libs/hooks/use-scroll";
 import { HamburgerMenuProvider } from "./HamburgerProvider";
 import { useBreakpoint } from "@/libs/hooks/use-breakpoints";
@@ -23,22 +24,24 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
         disableTransitionOnChange
       >
         <FontsProvider>
-          <main style={{ minHeight: "100vh", paddingTop: "60px" }}>
-            <HamburgerMenuProvider>
-              <Header
-                isMobile={isMobile}
-                isTablet={isTablet}
-                isDesktop={isDesktop}
-                refObject={headerRef}
-                scrollDir={scrollDirection}
-                isScrolled={isScrolled}
-                isAuthenticated={true}
-              />
-            </HamburgerMenuProvider>
-            {children}
-          </main>
-          <Toaster />
-          <Footer />
+          <AnimationProvider>
+            <main style={{ minHeight: "100vh", paddingTop: "60px" }}>
+              <HamburgerMenuProvider>
+                <Header
+                  isMobile={isMobile}
+                  isTablet={isTablet}
+                  isDesktop={isDesktop}
+                  refObject={headerRef}
+                  scrollDir={scrollDirection}
+                  isScrolled={isScrolled}
+                  isAuthenticated={true}
+                />
+              </HamburgerMenuProvider>
+              {children}
+            </main>
+            <Toaster />
+            <Footer />
+          </AnimationProvider>
         </FontsProvider>
       </ThemesProvider>
     </>

@@ -17,7 +17,44 @@ const messages = {
   termsRequired: "You must accept the terms and conditions to proceed.",
   topicRequired: "Topic is required",
   messageRequired: "Message is required",
+  invalidDate: "Please enter a valid date.",
+  tooYoung: "You must be at least 18 years old.",
+  dateRequired: "Date of birth is required.",
 };
+
+// 🔐 Date of birth rules
+// 🔐 Final schema
+export const dateRules = z
+
+  .date()
+  .refine((date) => !isNaN(date.getTime()), {
+    message: messages.invalidDate,
+  })
+  .describe("Date");
+
+export const dateOfBirthSchema = z
+  .date()
+  .refine((date) => !isNaN(date.getTime()), {
+    message: messages.invalidDate,
+  })
+  // .refine((date) => calculateAge(date) >= MIN_AGE, {
+  //   message: messages.tooYoung,
+  // })
+  .describe("Date of birth");
+
+export function safeParseDateToString(input: unknown): string | null {
+  const result = dateRules.safeParse(input);
+  return result.success ? result.data.toISOString() : null;
+}
+
+// 🔐 Height rules
+export const heightRules = z
+  .string()
+  .min(1, { message: "Height is required" })
+  .refine((val) => parseFloat(val) > 0, {
+    message: "Height must be a positive number",
+  })
+  .describe("Height input as string, parsed to positive integer");
 
 // 🔐 Full name rules
 export const fullnameRules = z

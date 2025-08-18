@@ -28,7 +28,7 @@ const Header = ({
   isAuthenticated,
 }: HeaderProps) => {
   const HeaderConfig: HeaderConfig = {
-    logo: "🚀 SparkVerse",
+    logo: "🚀 Feature",
     navLinks: navigationLinks,
   };
 
