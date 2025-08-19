@@ -9,9 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/shadcn/button";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
 import { Textarea } from "@/components/ui/shadcn/textarea";
-import { PasswordInput } from "@/components/ui/custom/input";
-import { DataPicker } from "@/components/ui/custom/DataPicker";
-import SelectorInput from "@/components/ui/custom/SelectorInput";
+import InputSelect from "@/components/ui/inputs/InputSelect";
+import InputCalender from "@/components/ui/inputs/InputCalender";
+import InputPassword from "@/components/ui/inputs/InputPassword";
 
 import {
   Control,
@@ -33,12 +33,12 @@ import BiodataForm, {
 } from "@/libs/forms/form.biodata";
 
 import {
-  additionalInfoSchema,
-  contactInfoSchema,
-  educationandCareerInfoSchema,
   familyInfoSchema,
-  partnerPreferencesInfoSchema,
+  contactInfoSchema,
   personalInfoSchema,
+  additionalInfoSchema,
+  educationandCareerInfoSchema,
+  partnerPreferencesInfoSchema,
 } from "@/libs/schema/schema.biodata";
 
 type PersonalInfoInputs = z.infer<typeof personalInfoSchema>;
@@ -161,34 +161,34 @@ export const BiodataFullForm = ({
           Click to Preview
         </Button>
       </div>
-      <BiodataTeamplate
+      <FormTemplate
         formList={BiodataForm.personalInfo}
         register={register}
         control={control}
         errors={errors}
         className="mt-6"
       />
-      <BiodataTeamplate
+      <FormTemplate
         formList={BiodataForm.contactInfo}
         register={register}
         errors={errors}
       />
-      <BiodataTeamplate
+      <FormTemplate
         formList={BiodataForm.educationandCareerInfo}
         register={register}
         errors={errors}
       />
-      <BiodataTeamplate
+      <FormTemplate
         formList={BiodataForm.familyInfo}
         register={register}
         errors={errors}
       />
-      <BiodataTeamplate
+      <FormTemplate
         formList={BiodataForm.partnerPreferencesInfo}
         register={register}
         errors={errors}
       />
-      <BiodataTeamplate
+      <FormTemplate
         formList={BiodataForm.additionalInfo}
         register={register}
         errors={errors}
@@ -197,7 +197,7 @@ export const BiodataFullForm = ({
   );
 };
 
-interface BiodataTeamplateProps {
+interface FormTemplateProps {
   formList: FormListType;
   register: UseFormRegister<BioDataFormInputs>;
   control?: Control<BioDataFormInputs>;
@@ -205,13 +205,13 @@ interface BiodataTeamplateProps {
   className?: string;
 }
 
-export const BiodataTeamplate = ({
+export const FormTemplate = ({
   formList,
   register,
   control,
   errors,
   className,
-}: BiodataTeamplateProps) => {
+}: FormTemplateProps) => {
   return (
     <Card>
       <CardHeader>
@@ -273,7 +273,10 @@ export const UniversalInputField = ({
 
       case "date":
         return control ? (
-          <DataPicker name={input.id} control={control} />
+          <InputCalender<BioDataFormInputs>
+            name={input.id as keyof BioDataFormInputs}
+            control={control}
+          />
         ) : (
           <div>Date Picker - control props not found</div>
         );
@@ -281,8 +284,8 @@ export const UniversalInputField = ({
       case "select":
         return control ? (
           selectValue && (
-            <SelectorInput
-              name={input.id}
+            <InputSelect<BioDataFormInputs>
+              name={input.id as keyof BioDataFormInputs}
               control={control}
               options={selectValue}
             />
@@ -301,7 +304,7 @@ export const UniversalInputField = ({
         return <Input type="tel" {...commonProps} />;
 
       case "password":
-        return <PasswordInput type="password" {...commonProps} />;
+        return <InputPassword type="password" {...commonProps} />;
 
       default:
         return <Input type={type} {...commonProps} />;

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { ChevronDownIcon } from "lucide-react";
-import { Controller, Control } from "react-hook-form";
+import { Controller, Control, FieldPath, FieldValues } from "react-hook-form";
 
 import { Button } from "@/components/ui/shadcn/button";
 import { Calendar } from "@/components/ui/shadcn/calendar";
@@ -10,26 +10,27 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/shadcn/popover";
-import { BioDataFormInputs } from "@/components/context/biodata/biodata.form";
 
-interface CalendarPickerProps {
-  name: string;
+interface InputCalenderProps<TFieldValues extends FieldValues> {
+  name: FieldPath<TFieldValues>;
+  control: Control<TFieldValues>;
   className?: string;
-  control: Control<BioDataFormInputs>; // You can replace `any` with a specific form type
+  placeholder?: string;
 }
 
-export const DataPicker = ({
+const InputCalender = <TFieldValues extends FieldValues>({
   name,
   control,
   className = "",
-}: CalendarPickerProps) => {
+  placeholder = "Select date",
+}: InputCalenderProps<TFieldValues>) => {
   return (
     <div className={`flex flex-col gap-3 ${className}`}>
       <Controller
-        name={name as keyof BioDataFormInputs}
+        name={name}
         control={control}
         render={({ field }) => {
-          const date = field.value as Date;
+          const date = field.value as Date | undefined;
           const setDate = (selected: Date | undefined) =>
             field.onChange(selected);
 
@@ -41,7 +42,7 @@ export const DataPicker = ({
                   id={name}
                   className="w-48 justify-between font-normal"
                 >
-                  {date ? date.toLocaleDateString() : "Select date"}
+                  {date ? date.toLocaleDateString() : placeholder}
                   <ChevronDownIcon />
                 </Button>
               </PopoverTrigger>
@@ -63,3 +64,5 @@ export const DataPicker = ({
     </div>
   );
 };
+
+export default InputCalender;

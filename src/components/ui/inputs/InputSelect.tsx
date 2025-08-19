@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Controller, Control } from "react-hook-form";
-import { BioDataFormInputs } from "@/components/context/biodata/biodata.form";
+"use client";
+import React from "react";
+import { Controller, Control, FieldPath, FieldValues } from "react-hook-form";
 
 import {
   Select,
@@ -10,26 +10,26 @@ import {
   SelectItem,
 } from "@/components/ui/shadcn/select";
 
-interface SelectorInputProps {
-  name: string;
+interface InputSelectProps<TFieldValues extends FieldValues> {
+  name: FieldPath<TFieldValues>;
   options: { label: string; value: string }[];
   placeholder?: string;
-  control: Control<BioDataFormInputs>; // You can replace `any` with a specific form type
+  control: Control<TFieldValues>;
 }
 
-const SelectorInput: React.FC<SelectorInputProps> = ({
+const InputSelect = <TFieldValues extends FieldValues>({
   name,
   options,
   placeholder,
   control,
-}) => {
+}: InputSelectProps<TFieldValues>) => {
   return (
     <Controller
-      name={name as keyof BioDataFormInputs}
+      name={name}
       control={control}
       render={({ field }) => (
         <Select value={field.value} onValueChange={field.onChange}>
-          <SelectTrigger className="min-w-[200px]lg:w-fit">
+          <SelectTrigger className="min-w-[200px] lg:w-fit">
             <SelectValue placeholder={placeholder || "Select an option"} />
           </SelectTrigger>
           <SelectContent>
@@ -49,4 +49,4 @@ const SelectorInput: React.FC<SelectorInputProps> = ({
   );
 };
 
-export default SelectorInput;
+export default InputSelect;

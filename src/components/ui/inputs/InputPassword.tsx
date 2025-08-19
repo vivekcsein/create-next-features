@@ -4,9 +4,9 @@ import { Input } from "../shadcn/input";
 import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/libs/utils/utils-shadcn";
 
-export type PasswordInputProps = React.ComponentProps<typeof Input>;
+export type inputPasswordProps = React.ComponentProps<typeof Input>;
 
-export const PasswordInput = ({ className, ...props }: PasswordInputProps) => {
+const InputPassword = ({ className, ...props }: inputPasswordProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -32,3 +32,5 @@ export const PasswordInput = ({ className, ...props }: PasswordInputProps) => {
     </div>
   );
 };
+
+export default InputPassword;
