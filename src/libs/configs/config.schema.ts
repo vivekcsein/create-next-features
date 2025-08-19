@@ -22,30 +22,18 @@ const messages = {
   dateRequired: "Date of birth is required.",
 };
 
-// 🔐 Date of birth rules
-// 🔐 Final schema
-export const dateRules = z
+export function safeParseDateToString(input: unknown): string | null {
+  const result = dateRules.safeParse(input);
+  return result.success ? result.data.toISOString() : null;
+}
 
+// 🔐 Date of birth rules
+export const dateRules = z
   .date()
   .refine((date) => !isNaN(date.getTime()), {
     message: messages.invalidDate,
   })
   .describe("Date");
-
-export const dateOfBirthSchema = z
-  .date()
-  .refine((date) => !isNaN(date.getTime()), {
-    message: messages.invalidDate,
-  })
-  // .refine((date) => calculateAge(date) >= MIN_AGE, {
-  //   message: messages.tooYoung,
-  // })
-  .describe("Date of birth");
-
-export function safeParseDateToString(input: unknown): string | null {
-  const result = dateRules.safeParse(input);
-  return result.success ? result.data.toISOString() : null;
-}
 
 // 🔐 Height rules
 export const heightRules = z
@@ -131,3 +119,13 @@ export const contactSchema = z
     newsletter: z.boolean().optional(),
   })
   .describe("Contact form");
+
+export const dateOfBirthSchema = z
+  .date()
+  .refine((date) => !isNaN(date.getTime()), {
+    message: messages.invalidDate,
+  })
+  // .refine((date) => calculateAge(date) >= MIN_AGE, {
+  //   message: messages.tooYoung,
+  // })
+  .describe("Date of birth");
