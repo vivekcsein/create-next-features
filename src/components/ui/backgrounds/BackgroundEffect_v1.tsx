@@ -3,14 +3,17 @@ import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/libs/hooks/use-gsap";
 import Scroll_indicator from "@/components/ui/custom/Scroll_indicator";
+import { ImageProps } from "@/types/app";
 
 const heroTree = "/images/tree.jpg";
 
 interface BackgroundEffect_v1Props {
+  image?: ImageProps;
   className?: string;
   children: React.ReactNode;
 }
 const BackgroundEffect_v1 = ({
+  image,
   className,
   children,
 }: BackgroundEffect_v1Props) => {
@@ -92,7 +95,7 @@ const BackgroundEffect_v1 = ({
       <div
         ref={backgroundRef}
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: `url(${heroTree})` }}
+        style={{ backgroundImage: `url(${image?.src || heroTree})` }}
       >
         <div className="absolute inset-0 bg-gradient-hero opacity-80"></div>
       </div>

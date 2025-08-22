@@ -1,15 +1,14 @@
 import clsx from "clsx";
 import React from "react";
 
-interface BackgroundEffect_v0Props {
+interface BackgroundGradient_v1Props {
   className?: string;
   children: React.ReactNode;
 }
-
-const BackgroundEffect_v0 = ({
+const BackgroundGradient_v1 = ({
   className,
   children,
-}: BackgroundEffect_v0Props) => {
+}: BackgroundGradient_v1Props) => {
   return (
     <div
       className={clsx(
@@ -22,4 +21,4 @@ const BackgroundEffect_v0 = ({
   );
 };
 
-export default BackgroundEffect_v0;
+export default BackgroundGradient_v1;

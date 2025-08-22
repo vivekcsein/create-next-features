@@ -33,12 +33,12 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
                   isTablet={isTablet}
                   isDesktop={isDesktop}
                   refObject={headerRef}
-                  scrollDir={scrollDirection}
-                  isScrolled={isScrolled}
                   isAuthenticated={true}
+                  isScrolled={isScrolled}
+                  scrollDir={scrollDirection}
                 />
               </HamburgerMenuProvider>
-              <BackgroundProvider variants="awesome">
+              <BackgroundProvider variants="gradient_v3">
                 {children}
               </BackgroundProvider>
             </main>

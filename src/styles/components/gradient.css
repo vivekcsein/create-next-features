@@ -1,3 +1,4 @@
+/* gradient version 2 */
 .bg_awesome {
     position: relative;
     overflow: hidden;
@@ -23,4 +24,61 @@
     100% {
         background-position: 0% 50%;
     }
+}
+
+/* gradient version 3 */
+.bg_gradient_v3 {
+    position: relative;
+    min-height: 100vh;
+    /* background: linear-gradient(135deg, #1e3c72, #2a5298); */
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+}
+
+.bg_gradient_v3_light-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* gradient version 4 */
+.bg_gradient_v4 {
+    position: relative;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.bg_gradient_v4_radial_light {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(ellipse at center,
+            var(--color-primary-foreground) 30%,
+            var(--color-primary) 70%,
+            transparent 100%);
+    opacity: 0.3;
+    overflow: hidden;
+
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
 }

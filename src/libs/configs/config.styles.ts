@@ -79,6 +79,24 @@ export const Themes = {
   },
 } as const;
 
+export const cssGradients = {
+  linear: [
+    {
+      primaryColor: "#622A9B",
+      secondaryColor: "#D96868",
+      gradient: "linear-gradient(90deg, #622a9b 18%, #d96868,#622a9b 82%)",
+    },
+  ],
+  radial: [
+    {
+      primaryColor: "#622A9B",
+      secondaryColor: "#D96868",
+      gradient:
+        "radial-gradient(circle at center, #622a9b 18%, #d96868,#622a9b 82%)",
+    },
+  ],
+};
+
 // const localfont = localFont({
 //   src: [
 //     {

@@ -1,18 +1,17 @@
-//import css
-import "@/styles/components/gradient.css";
+import React from "react";
 import { cn } from "@/libs/utils/utils-shadcn";
 
-interface BackgroundEffect_v3Props {
+interface BackgroundGradient_v2Props {
   className?: string;
   children: React.ReactNode;
 }
-const BackgroundEffect_v3 = ({
-  children,
+const BackgroundGradient_v2 = ({
   className,
-}: BackgroundEffect_v3Props) => {
+  children,
+}: BackgroundGradient_v2Props) => {
   return (
     <div className={cn("bg_awesome min-h-screen", className)}>{children}</div>
   );
 };
 
-export default BackgroundEffect_v3;
+export default BackgroundGradient_v2;
