@@ -5,6 +5,7 @@ import Footer from "../layouts/Footer";
 import FontsProvider from "./FontsProvider";
 import ThemesProvider from "./ThemesProvider";
 import { Toaster } from "../ui/shadcn/sonner";
+import BackgroundProvider from "./BackgroundProvider";
 import { AnimationProvider } from "./AnimationProvider";
 import { useScrollStatus } from "@/libs/hooks/use-scroll";
 import { HamburgerMenuProvider } from "./HamburgerProvider";
@@ -37,7 +38,9 @@ const LayoutProvider = ({ children }: { children: React.ReactNode }) => {
                   isAuthenticated={true}
                 />
               </HamburgerMenuProvider>
-              {children}
+              <BackgroundProvider variants="awesome">
+                {children}
+              </BackgroundProvider>
             </main>
             <Toaster />
             <Footer />

@@ -1,4 +1,5 @@
 "use client";
+import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import { gsap, ScrollTrigger } from "@/libs/hooks/use-gsap";
 import Scroll_indicator from "@/components/ui/custom/Scroll_indicator";
@@ -6,9 +7,13 @@ import Scroll_indicator from "@/components/ui/custom/Scroll_indicator";
 const heroTree = "/images/tree.jpg";
 
 interface BackgroundEffect_v1Props {
+  className?: string;
   children: React.ReactNode;
 }
-const BackgroundEffect_v1 = ({ children }: BackgroundEffect_v1Props) => {
+const BackgroundEffect_v1 = ({
+  className,
+  children,
+}: BackgroundEffect_v1Props) => {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
@@ -76,7 +81,12 @@ const BackgroundEffect_v1 = ({ children }: BackgroundEffect_v1Props) => {
   return (
     <div
       ref={heroRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className={
+        (clsx(
+          "relative h-screen flex items-center justify-center overflow-hidden"
+        ),
+        className)
+      }
     >
       {/* Background Image */}
       <div
