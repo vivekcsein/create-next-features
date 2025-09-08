@@ -10,7 +10,7 @@ const BackgroundGradient_v3 = ({
   children,
 }: BackgroundGradient_v3Props) => {
   return (
-    <div className={clsx("bg_gradient_v3 min-h-screen", className)}>
+    <div className={clsx("bg_gradient_v3", className)}>
       <div className="bg_gradient_v3_light-effect"></div>
       {children}
     </div>
