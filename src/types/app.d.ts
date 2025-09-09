@@ -61,6 +61,13 @@ export interface RootLayoutResponse {
   layout: RootLayoutData;
 }
 
+export interface SidebarItem {
+  id: string;
+  label: string;
+  icon: string;
+  active?: boolean;
+}
+
 export type InputType =
   | "text"
   | "textarea"

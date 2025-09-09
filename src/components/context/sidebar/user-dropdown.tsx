@@ -1,14 +1,21 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { User, Settings, LogOut, CreditCard, HelpCircle } from "lucide-react";
+import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
+import ImageAvatar from "@/components/ui/images/Image_avatar";
 
 interface UserDropdownProps {
   isCollapsed: boolean;
 }
 
 export function UserDropdown({ isCollapsed }: UserDropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  // const { user } = useAuthStore();
+  const user = {
+    fullname: "John Doe",
+    email: "john@example.com",
+    avatar: "/images/avatar/dummyAvatar.jpg",
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -26,11 +33,11 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
   }, []);
 
   const userMenuItems = [
-    { id: "profile", label: "Profile", icon: User },
-    { id: "billing", label: "Billing", icon: CreditCard },
-    { id: "settings", label: "Settings", icon: Settings },
-    { id: "help", label: "Help", icon: HelpCircle },
-    { id: "logout", label: "Sign out", icon: LogOut, danger: true },
+    { id: "profile", label: "Profile", href: "/profile", icon: "User" },
+    { id: "billing", label: "Billing", href: "/billing", icon: "CreditCard" },
+    { id: "settings", label: "Settings", href: "/settings", icon: "Settings" },
+    { id: "help", label: "Help", href: "/help", icon: "Info" },
+    { id: "logout", label: "Sign out", icon: "LogOut", danger: true },
   ];
 
   return (
@@ -39,22 +46,23 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
         onClick={() => setIsOpen(!isOpen)}
         className={`
           w-full flex items-center px-3 py-2.5 rounded-lg
-          text-muted-foreground hover:text-muted
           transition-all duration-200 ease-smooth
           group relative
-          ${isCollapsed ? "justify-center hover:bg-none" : "space-x-4 hover:bg-primary"}
+          ${isCollapsed ? "justify-center hover:bg-none" : "space-x-4 hover:bg-primary/30"}
         `}
       >
-        <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
-          <User className="w-4 h-4 text-primary-foreground" />
+        <div className="w-8 h-8 bg-primary/30 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer">
+          <ImageAvatar src={user?.avatar} />
         </div>
 
         {!isCollapsed && (
           <div className="flex-1 text-left min-w-0">
             <div className="text-sm font-medium text-muted truncate">
-              John Doe
+              {user?.fullname || "John Doe"}
             </div>
-            <div className="text-xs text-muted truncate">john@example.com</div>
+            <div className="text-xs text-muted truncate">
+              {user?.email || "john@example.com"}
+            </div>
           </div>
         )}
 
@@ -70,7 +78,7 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
             pointer-events-none z-50 whitespace-nowrap
           "
           >
-            John Doe
+            {user?.fullname || "John Doe"}
           </div>
         )}
       </button>
@@ -90,10 +98,10 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
           {isCollapsed && (
             <div className="px-3 py-2 border-b border-border">
               <div className="text-sm font-medium text-muted-foreground">
-                John Doe
+                {user?.fullname || "John Doe"}
               </div>
               <div className="text-xs text-muted-foreground">
-                john@example.com
+                {user?.email || "john@example.com"}
               </div>
             </div>
           )}
@@ -101,7 +109,6 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
           {/* Menu Items */}
           <div className="py-1">
             {userMenuItems.map((item) => {
-              const IconComponent = item.icon;
               return (
                 <button
                   key={item.id}
@@ -111,7 +118,7 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
                     console.log(`Clicked: ${item.label}`);
                   }}
                   className={`
-                    w-full flex items-center space-x-3 px-3 py-2 text-left cursor-pointer
+                    w-full hover:bg-primary/30 flex items-center space-x-3 px-3 py-2 text-left cursor-pointer
                     transition-colors duration-150 ease-smooth
                     ${
                       item.danger
@@ -120,7 +127,7 @@ export function UserDropdown({ isCollapsed }: UserDropdownProps) {
                     }
                   `}
                 >
-                  <IconComponent className="w-4 h-4" />
+                  <Lucid_Icon iconName={item.icon} className="w-4 h-4" />
                   <span className="text-sm">{item.label}</span>
                 </button>
               );
