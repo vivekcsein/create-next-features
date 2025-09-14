@@ -1,7 +1,7 @@
-import React from "react";
 import { ContactForm } from "@/components/context/auth/auth.main";
+import React from "react";
 
-const ContactComponent = () => {
+const ContactUsPage = () => {
   return (
     <div className="max-w-xl mx-auto space-y-6">
       <ContactForm />
@@ -9,4 +9,4 @@ const ContactComponent = () => {
   );
 };
 
-export default ContactComponent;
+export default ContactUsPage;

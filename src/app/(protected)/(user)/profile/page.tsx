@@ -1,17 +1,34 @@
-import React from "react";
+"use client";
+import dynamic from "next/dynamic";
+import React, { useCallback } from "react";
+import { useSidebarDesktop } from "@/components/providers/SidebarDesktopProvider";
+
+const Profile_User = dynamic(
+  () => import("@/components/context/profile/Profile_User"),
+  { ssr: false }
+);
+const Profile_orderPage = dynamic(
+  () => import("@/components/context/profile/Profile_orderPage"),
+  { ssr: false }
+);
 
 const ProfilePage = () => {
-  return (
-    <div className="flex-1 overflow-y-auto p-4">
-      <ul className="space-y-2">
-        {Array.from({ length: 100 }).map((_, i) => (
-          <li key={i} className="text-sm font-medium">
-            List {i + 1}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  const { activeItem } = useSidebarDesktop();
+
+  const snippet = useCallback(() => {
+    switch (activeItem?.id) {
+      case "Profile":
+        return <Profile_User />;
+
+      case "Orders":
+        return <Profile_orderPage />;
+
+      default:
+        return <div>{activeItem?.label}</div>;
+    }
+  }, [activeItem]);
+
+  return <div className="flex-1 overflow-y-auto">{snippet()}</div>;
 };
 
 export default ProfilePage;

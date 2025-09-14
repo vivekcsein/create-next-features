@@ -1,23 +1,35 @@
 import React from "react";
-import { Avatar, AvatarImage } from "../shadcn/avatar";
+import { User } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "../shadcn/avatar";
 
 type ImageAvatarProps = {
   src?: string;
   alt?: string;
   className?: string;
+  size?: number | string; // Accepts number (px) or Tailwind-compatible string like "w-10"
 };
 
 const fallbackSrc = "/images/avatar/dummyAvatar.jpg";
 const fallbackAlt = "Default Avatar";
 
-const ImageAvatar: React.FC<ImageAvatarProps> = ({ src, alt, className }) => {
+const ImageAvatar: React.FC<ImageAvatarProps> = ({
+  src,
+  alt,
+  className,
+  size = 40,
+}) => {
   const imageSrc = src && src.trim() !== "" ? src : fallbackSrc;
+
+  const dimensionStyle =
+    typeof size === "number" ? { width: size, height: size } : undefined;
+
+  const tailwindSizeClass = typeof size === "string" ? size : "";
 
   return (
     <div
       className={`flex items-center gap-1 w-fit font-medium text-[1rem] cursor-pointer ${className || ""}`}
     >
-      <Avatar>
+      <Avatar className={tailwindSizeClass} style={dimensionStyle}>
         <AvatarImage
           src={imageSrc}
           alt={alt || fallbackAlt}
@@ -27,7 +39,11 @@ const ImageAvatar: React.FC<ImageAvatarProps> = ({ src, alt, className }) => {
               target.src = fallbackSrc;
             }
           }}
+          className="rounded-full object-cover w-full h-full"
         />
+        <AvatarFallback className="rounded-lg">
+          <User className="w-full h-full" />
+        </AvatarFallback>
       </Avatar>
     </div>
   );
