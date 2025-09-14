@@ -1,11 +1,9 @@
 "use client";
 import React from "react";
-import { SchemaKey } from "../forms/profile.main";
 import { Button } from "@/components/ui/shadcn/button";
 import Lucid_Icon from "@/components/ui/helper/Lucid_Icon";
 
 interface Profile_infoProps {
-  id: SchemaKey;
   icon: string;
   title: string;
   value: string;
@@ -14,15 +12,12 @@ interface Profile_infoProps {
 }
 
 const Profile_info = ({
-  id,
   icon,
   title,
   value,
   actionLabel,
   onAction,
 }: Profile_infoProps) => {
-  console.log(id);
-
   return (
     <div className="bg-gradient-card rounded-2xl p-5 shadow-pastel border border-white/20 backdrop-blur-sm">
       <div className="flex items-center justify-between">

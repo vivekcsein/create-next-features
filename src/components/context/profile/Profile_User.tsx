@@ -1,15 +1,23 @@
 "use client";
-import React, { useMemo } from "react";
-import { useSession } from "@/libs/hooks/use-session";
-import ProfileForm from "@/libs/forms/form.profile";
+import React, { useMemo, useState } from "react";
 import Profile_info from "./info/Profile_info";
+import Profile_forms from "./info/Profile_forms";
+import { SchemaKey } from "./forms/profile.main";
+import ProfileForm from "@/libs/forms/form.profile";
+import { Description } from "@radix-ui/react-dialog";
+import { useSession } from "@/libs/hooks/use-session";
 import { Dialog, DialogTitle } from "@/components/ui/shadcn/dialog";
 import { DialogContentUserProfile } from "@/components/ui/custom/dialog";
-import { Description } from "@radix-ui/react-dialog";
-import Profile_forms from "./info/Profile_forms";
 
 const Profile_User = () => {
   const { user } = useSession();
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [currentSchema, setCurrentSchema] = useState<SchemaKey | null>(null);
+
+  const handleOpenForm = (schemaKey: SchemaKey) => {
+    setCurrentSchema(schemaKey);
+    setIsFormOpen(true);
+  };
 
   const userInfoList = useMemo(() => {
     return ProfileForm.map((item) => ({
@@ -18,7 +26,7 @@ const Profile_User = () => {
       title: item.title || "",
       value: user[item.id] ?? "Not Provided",
       actionLabel: item.submit?.action === "edit" ? "Edit" : "Update",
-      onAction: () => onAction(item.id),
+      onAction: () => handleOpenForm(item.id),
     }));
   }, [user]);
 
@@ -27,7 +35,7 @@ const Profile_User = () => {
       <div className="container mx-auto px-4 pb-8">
         <div className="bg-white/40 backdrop-blur-md rounded-3xl p-6 shadow-bubbly">
           <h2 className="text-xl font-bold text-foreground mb-6">
-            User Information
+            User Dashboard
           </h2>
           <div className="space-y-4">
             {userInfoList.map((props) => (
@@ -40,7 +48,7 @@ const Profile_User = () => {
       {/* Centralized Dialog */}
       <Dialog open={isFormOpen} onOpenChange={setIsFormOpen}>
         <DialogContentUserProfile className="w-fit min-w-128">
-          <Profile_forms currentSchema={currentSchema} />
+          {currentSchema && <Profile_forms currentSchema={currentSchema} />}
         </DialogContentUserProfile>
         <DialogTitle className="hidden" />
         <Description className="hidden" />
